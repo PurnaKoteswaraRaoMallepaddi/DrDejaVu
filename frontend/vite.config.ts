@@ -10,6 +10,17 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:8000",
         changeOrigin: true,
+        configure: (proxy) => {
+          proxy.on("proxyReq", (proxyReq, req) => {
+            console.log(`[vite-proxy] ${req.method} ${req.url} -> http://localhost:8000${req.url}`);
+          });
+          proxy.on("proxyRes", (proxyRes, req) => {
+            console.log(`[vite-proxy] ${req.method} ${req.url} <- ${proxyRes.statusCode}`);
+          });
+          proxy.on("error", (err, req) => {
+            console.error(`[vite-proxy] ERROR ${req.method} ${req.url}:`, err.message);
+          });
+        },
       },
     },
   },

@@ -1,7 +1,8 @@
 import logging
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
 logging.basicConfig(
     level=logging.INFO,
@@ -35,6 +36,19 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+logger = logging.getLogger(__name__)
+
+
+class RequestLogMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        logger.info(">> %s %s (origin=%s)", request.method, request.url.path, request.headers.get("origin", "none"))
+        response = await call_next(request)
+        logger.info("<< %s %s -> %s", request.method, request.url.path, response.status_code)
+        return response
+
+
+app.add_middleware(RequestLogMiddleware)
 
 app.include_router(health.router, tags=["Health"])
 app.include_router(transcribe.router, prefix="/api", tags=["Transcription"])
