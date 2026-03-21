@@ -22,8 +22,21 @@ export async function transcribeAudio(
   if (doctorName) form.append("doctor_name", doctorName);
   if (consultationDate) form.append("consultation_date", consultationDate);
 
-  const { data } = await api.post<TranscribeResult>("/api/transcribe", form);
-  return data;
+  console.log("[api] POST /api/transcribe — baseURL:", api.defaults.baseURL, "origin:", window.location.origin);
+  try {
+    const { data } = await api.post<TranscribeResult>("/api/transcribe", form);
+    console.log("[api] transcribe response:", data);
+    return data;
+  } catch (err: any) {
+    console.error("[api] transcribe FAILED:", err.message);
+    console.error("[api] request URL:", err.config?.url, "baseURL:", err.config?.baseURL);
+    if (err.response) {
+      console.error("[api] response status:", err.response.status, "data:", err.response.data);
+    } else if (err.request) {
+      console.error("[api] no response received (network error or CORS block)");
+    }
+    throw err;
+  }
 }
 
 export async function queryHistory(

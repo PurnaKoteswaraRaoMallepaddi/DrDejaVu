@@ -17,9 +17,20 @@ app = FastAPI(
     version="1.0.0",
 )
 
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+# In development, also allow Codespaces / Gitpod forwarded URLs
+if settings.app_env == "development":
+    allowed_origins.append("https://*.app.github.dev")
+    allowed_origins.append("https://*.github.dev")
+    allowed_origins.append("https://*.gitpod.io")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["*"] if settings.app_env == "development" else allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
