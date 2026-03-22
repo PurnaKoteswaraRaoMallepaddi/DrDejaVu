@@ -4,6 +4,7 @@ Uses the Eigen AI chat model to extract structured summaries
 (diagnoses, medications, lifestyle advice) from consultation transcripts.
 """
 
+import json
 import httpx
 
 from app.config import settings
@@ -23,7 +24,10 @@ Be concise but thorough. Use bullet points."""
 
 
 async def summarize_transcript(transcript: str) -> str:
-    """Summarize a consultation transcript into structured categories."""
+    """Summarize a consultation transcript using gpt-oss-120b.
+    
+    Uses Eigen AI's chat/completions endpoint with JSON format.
+    """
     url = f"{settings.eigen_api_base_url}/chat/completions"
     headers = {
         "Authorization": f"Bearer {settings.eigen_api_key}",
@@ -31,13 +35,15 @@ async def summarize_transcript(transcript: str) -> str:
     }
 
     payload = {
-        "model": settings.eigen_chat_model,
+        "model": settings.eigen_summarizer_model,
         "messages": [
             {"role": "system", "content": SUMMARIZE_PROMPT},
             {"role": "user", "content": f"Summarize this consultation:\n\n{transcript}"},
         ],
         "temperature": 0.3,
-        "max_tokens": 1024,
+        "reasoning_effort": "medium",
+        "max_tokens": 2000,
+        "stream": False,
     }
 
     async with httpx.AsyncClient(timeout=60.0) as client:
