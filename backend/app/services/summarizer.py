@@ -4,10 +4,8 @@ Uses the Eigen AI chat model to extract structured summaries
 (diagnoses, medications, lifestyle advice) from consultation transcripts.
 """
 
-import json
-import httpx
-
 from app.config import settings
+from app.services.http_client import get_http_client
 
 
 SUMMARIZE_PROMPT = """\
@@ -46,9 +44,9 @@ async def summarize_transcript(transcript: str) -> str:
         "stream": False,
     }
 
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        response = await client.post(url, headers=headers, json=payload)
-        response.raise_for_status()
-        result = response.json()
+    client = get_http_client()
+    response = await client.post(url, headers=headers, json=payload)
+    response.raise_for_status()
+    result = response.json()
 
     return result["choices"][0]["message"]["content"]

@@ -16,9 +16,8 @@ frontend/dist/
 .env.local
 
 # Data
-data/chroma_db/
-data/uploads/
-data/sample_audio/
+data/
+backend/data/
 
 # IDE
 .vscode/

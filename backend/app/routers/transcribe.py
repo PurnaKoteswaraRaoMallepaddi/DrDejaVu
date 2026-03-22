@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import uuid
 from datetime import datetime
@@ -58,36 +59,30 @@ async def transcribe_consultation(
         logger.exception("Step 2 FAILED: Summarization error")
         raise
 
-    # 3. Index in vector DB for RAG retrieval
+    # 3 & 4. Index in vector DB and save to SQLite concurrently
     date_str = consultation_date or datetime.now().isoformat()
     try:
-        logger.info("Step 3: Indexing consultation in vector DB...")
-        await index_consultation(
-            consultation_id=consultation_id,
-            patient_id=patient_id,
-            transcript=transcript,
-            summary=summary,
-            consultation_date=date_str,
+        logger.info("Steps 3-4: Indexing in vector DB and saving to SQLite concurrently...")
+        await asyncio.gather(
+            index_consultation(
+                consultation_id=consultation_id,
+                patient_id=patient_id,
+                transcript=transcript,
+                summary=summary,
+                consultation_date=date_str,
+            ),
+            save_consultation(
+                consultation_id=consultation_id,
+                patient_id=patient_id,
+                doctor_name=doctor_name,
+                consultation_date=date_str,
+                transcript=transcript,
+                summary=summary,
+            ),
         )
-        logger.info("Indexing complete")
+        logger.info("Indexing and SQLite save complete")
     except Exception:
-        logger.exception("Step 3 FAILED: RAG indexing error")
-        raise
-
-    # 4. Save metadata to SQLite
-    try:
-        logger.info("Step 4: Saving consultation to SQLite...")
-        await save_consultation(
-            consultation_id=consultation_id,
-            patient_id=patient_id,
-            doctor_name=doctor_name,
-            consultation_date=date_str,
-            transcript=transcript,
-            summary=summary,
-        )
-        logger.info("SQLite save complete")
-    except Exception:
-        logger.exception("Step 4 FAILED: SQLite save error")
+        logger.exception("Steps 3-4 FAILED: Indexing/save error")
         raise
 
     logger.info("Transcription pipeline finished — consultation_id=%s", consultation_id)

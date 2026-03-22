@@ -57,10 +57,10 @@ async def query_consultations(patient_id: str, question: str) -> QueryResponse:
     """Query patient history using RAG: retrieve context + generate answer."""
     collection = get_collection()
 
-    # Retrieve relevant documents for this patient
+    # Retrieve top-5 most relevant documents for this patient
     results = collection.query(
         query_texts=[question],
-        n_results=10,
+        n_results=5,
         where={"patient_id": patient_id},
     )
 

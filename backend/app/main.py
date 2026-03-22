@@ -1,4 +1,5 @@
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,11 +12,20 @@ logging.basicConfig(
 
 from app.config import settings
 from app.routers import transcribe, query, chat, consultations, health, audio
+from app.services.http_client import close_http_client
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    await close_http_client()
+
 
 app = FastAPI(
     title="DrDejaVu API",
     description="Voice-First Longitudinal Health Memory — powered by Eigen AI",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 allowed_origins = [
