@@ -11,9 +11,8 @@ import re
 import uuid
 from pathlib import Path
 
-import httpx
-
 from app.config import settings
+from app.services.http_client import get_http_client
 
 
 def convert_to_voice_friendly_text(text: str) -> str:
@@ -94,22 +93,20 @@ async def generate_voice_response(text: str, language: str = "en") -> str:
     audio_id = str(uuid.uuid4())
     output_path = Path(settings.upload_dir) / f"response_{audio_id}.wav"
 
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        response = await client.post(url, headers=headers, 
-                                     json={"model": settings.eigen_chat_model, "text": voice_text})
-        logging.info(f"[TTS] Response status: {response.status_code}")
-        
-        # Log error response BEFORE raising
-        if response.status_code != 200:
-            try:
-                error_json = response.json()
-                logging.error(f"[TTS] Error response: {json.dumps(error_json, indent=2)}")
-            except:
-                logging.error(f"[TTS] Error response text: {response.text}")
-        
-        response.raise_for_status()
-        output_path.write_bytes(response.content)
-        logging.info(f"[TTS] Audio saved to {output_path}, size: {len(response.content)} bytes")
+    client = get_http_client()
+    response = await client.post(url, headers=headers,
+                                 json={"model": settings.eigen_chat_model, "text": voice_text})
+    logging.info(f"[TTS] Response status: {response.status_code}")
+
+    if response.status_code != 200:
+        try:
+            error_json = response.json()
+            logging.error(f"[TTS] Error response: {json.dumps(error_json, indent=2)}")
+        except Exception:
+            logging.error(f"[TTS] Error response text: {response.text}")
+
+    response.raise_for_status()
+    output_path.write_bytes(response.content)
 
     return f"/api/audio/{audio_id}"
 
@@ -145,26 +142,23 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
     messages_array = [{"role": "system", "content": system_prompt}] + messages
 
     payload = {
-        "model": settings.eigen_summarizer_model,  # Use gpt-oss-120b for LLM
+        "model": settings.eigen_summarizer_model,
         "messages": messages_array,
         "temperature": 0.7,
-        "max_tokens": 1024,
+        "max_tokens": 256,
+        "reasoning_effort": "low",
         "stream": False,
     }
-    
-    logging.info(f"[Chat] Sending request to {url}")
-    logging.info(f"[Chat] Model: {settings.eigen_summarizer_model}")
-    logging.info(f"[Chat] Messages: {len(messages_array)} (system + user)")
 
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        response = await client.post(url, headers=headers, json=payload)
-        logging.info(f"[Chat] Response status: {response.status_code}")
-        
-        if response.status_code != 200:
-            logging.error(f"[Chat] Response text: {response.text}")
-        
-        response.raise_for_status()
-        result = response.json()
+    logging.info(f"[Chat] Sending request, model={settings.eigen_summarizer_model}")
 
-    logging.info(f"[Chat] Response received: {json.dumps(result, indent=2)}")
+    client = get_http_client()
+    response = await client.post(url, headers=headers, json=payload)
+    logging.info(f"[Chat] Response status: {response.status_code}")
+
+    if response.status_code != 200:
+        logging.error(f"[Chat] Response text: {response.text}")
+
+    response.raise_for_status()
+    result = response.json()
     return result["choices"][0]["message"]["content"]

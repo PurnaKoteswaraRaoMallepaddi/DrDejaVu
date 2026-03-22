@@ -1,5 +1,6 @@
+import asyncio
+
 from fastapi import APIRouter, File, Form, UploadFile
-from fastapi.responses import StreamingResponse
 
 from app.models.schemas import ChatRequest, ChatResponse
 from app.services.eigen_asr import transcribe_audio
@@ -12,7 +13,6 @@ router = APIRouter()
 @router.post("/chat/text", response_model=ChatResponse)
 async def chat_text(req: ChatRequest):
     """Text-based chat: ask a question, get text + optional audio answer."""
-    # RAG query
     rag_result = await query_consultations(
         patient_id=req.patient_id,
         question=req.question,
@@ -23,7 +23,6 @@ async def chat_text(req: ChatRequest):
         sources=rag_result.sources,
     )
 
-    # Generate voice response if requested
     if req.voice_response:
         audio_url = await generate_voice_response(rag_result.answer)
         response.audio_url = audio_url
@@ -36,9 +35,15 @@ async def chat_voice(
     audio: UploadFile = File(...),
     patient_id: str = Form(...),
 ):
-    """Voice-based chat: send audio question, get text + audio answer."""
-    # 1. Transcribe the question
+    """Voice-based chat: send audio question, get text + audio answer.
+
+    Reads the uploaded audio eagerly, then runs transcription.
+    After RAG retrieval, generates voice response.
+    """
+    # Read audio bytes eagerly so the upload is consumed fast
     audio_bytes = await audio.read()
+
+    # 1. Transcribe the question
     question = await transcribe_audio(audio_bytes, audio.filename or "query.wav")
 
     # 2. RAG query

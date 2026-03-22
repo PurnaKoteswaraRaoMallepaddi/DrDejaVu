@@ -5,9 +5,9 @@ Converts consultation audio (wav/mp3/m4a) into text transcripts.
 """
 
 import logging
-import httpx
 
 from app.config import settings
+from app.services.http_client import get_http_client
 
 logger = logging.getLogger(__name__)
 
@@ -40,21 +40,19 @@ async def transcribe_audio(audio_bytes: bytes, filename: str) -> str:
     logger.info(f"[ASR] Audio size: {len(audio_bytes)} bytes")
     logger.info(f"[ASR] Request data: {data}")
 
-    async with httpx.AsyncClient(timeout=120.0) as client:
-        response = await client.post(
-            url,
-            headers=headers,
-            data=data,
-            files={"file": (filename, audio_bytes, mime_type)},
-        )
-        
-        logger.info(f"[ASR] Response status: {response.status_code}")
-        logger.info(f"[ASR] Response headers: {dict(response.headers)}")
-        
-        response.raise_for_status()
-        result = response.json()
-        
-        logger.info(f"[ASR] Full response: {result}")
+    client = get_http_client()
+    response = await client.post(
+        url,
+        headers=headers,
+        data=data,
+        files={"file": (filename, audio_bytes, mime_type)},
+        timeout=120.0,
+    )
+
+    logger.info(f"[ASR] Response status: {response.status_code}")
+
+    response.raise_for_status()
+    result = response.json()
 
     # Extract transcription from response
     text = result.get("transcription", "")

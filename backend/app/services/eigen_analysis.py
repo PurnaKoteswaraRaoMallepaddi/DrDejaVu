@@ -4,10 +4,9 @@ Analyzes tone, sentiment, and well-being from patient voice recordings.
 Used for longitudinal comparison of patient emotional state across visits.
 """
 
-import httpx
-
 from app.config import settings
 from app.models.schemas import AnalysisResponse
+from app.services.http_client import get_http_client
 
 
 async def analyze_audio(audio_bytes: bytes, filename: str) -> AnalysisResponse:
@@ -25,18 +24,19 @@ async def analyze_audio(audio_bytes: bytes, filename: str) -> AnalysisResponse:
         "Authorization": f"Bearer {settings.eigen_api_key}",
     }
 
-    async with httpx.AsyncClient(timeout=120.0) as client:
-        response = await client.post(
-            url,
-            headers=headers,
-            data={
-                "model": settings.eigen_understanding_model,
-                "analysis_type": "sentiment,tone,wellbeing",
-            },
-            files={"file": (filename, audio_bytes, mime_type)},
-        )
-        response.raise_for_status()
-        result = response.json()
+    client = get_http_client()
+    response = await client.post(
+        url,
+        headers=headers,
+        data={
+            "model": settings.eigen_understanding_model,
+            "analysis_type": "sentiment,tone,wellbeing",
+        },
+        files={"file": (filename, audio_bytes, mime_type)},
+        timeout=120.0,
+    )
+    response.raise_for_status()
+    result = response.json()
 
     return AnalysisResponse(
         sentiment=result.get("sentiment", "neutral"),
