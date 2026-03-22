@@ -1,0 +1,40 @@
+============================================================
+CONSULTATION 5 — REMISSION CONFIRMATION
+============================================================
+Patient:  Ramesh Patel (Male, 54)
+Doctor:   Dr. Ananya Sharma, Internal Medicine
+Date:     February 17, 2026
+Duration: ~1 minute
+============================================================
+
+DR. SHARMA: Ramesh, your A1c is five point four. Fasting glucose ninety-four.
+
+RAMESH: Five point four. That's completely normal, isn't it?
+
+DR. SHARMA: Completely normal. Below five seven. You've been on reduced Metformin for fifteen months and your numbers kept improving. As of today, I'm discontinuing your Metformin. You are officially in diabetes remission.
+
+RAMESH: [Emotional pause] Three years ago I walked in here terrified I'd end up on insulin like my father.
+
+DR. SHARMA: And instead you're thirty-two pounds lighter, off two of three medications, blood pressure one fourteen over seventy without Lisinopril, and every marker — kidneys, eyes, lipids — is normal. The Atorvastatin stays for cardiovascular protection, but that's it. One pill.
+
+RAMESH: I can't thank you enough.
+
+DR. SHARMA: You did the work. Now the important part — remission is not a cure. Your genetic predisposition is still there. If the lifestyle slips, the diabetes comes back. I want A1c checks every six months, annual eye and kidney screening, and keep logging your fasting glucose weekly. Stay the course.
+
+RAMESH: This is who I am now. I'm not going back.
+
+DR. SHARMA: I believe you. See you in six months.
+
+============================================================
+KEY METRICS: Fasting Glucose 94 | HbA1c 5.4% | BP 114/70 | LDL 82 | HDL 56 | Weight 182 lbs
+MEDICATIONS: Metformin STOPPED, Lisinopril STOPPED, Atorvastatin 20mg continued
+STATUS: TYPE 2 DIABETES — IN REMISSION
+
+THREE-YEAR SUMMARY:
+  HbA1c:   8.4% → 7.1% → 6.2% → 5.9% → 5.4%
+  Glucose: 189  → 152  → 108  → 101  → 94
+  Weight:  214  → 207  → 192  → 186  → 182
+  BP:      148/92 → 134/86 → 124/78 → 118/74 → 114/70
+
+FOLLOW-UP: 6 months (ongoing surveillance indefinitely)
+============================================================

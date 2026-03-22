@@ -1,0 +1,29 @@
+============================================================
+CONSULTATION 1 — INITIAL DIAGNOSIS
+============================================================
+Patient:  Ramesh Patel (Male, 52)
+Doctor:   Dr. Ananya Sharma, Internal Medicine
+Date:     January 18, 2023
+Duration: ~1 minute
+============================================================
+
+DR. SHARMA: Mr. Patel, I've got your labs back. Your fasting glucose is one eighty-nine and your HbA1c is eight point four percent. That confirms Type 2 Diabetes.
+
+RAMESH: Diabetes? My father was on insulin for years. Is that where I'm headed?
+
+DR. SHARMA: Not necessarily. We've caught this at a manageable stage. Your blood pressure is one forty-eight over ninety-two, and your LDL cholesterol is one fifty-eight — both elevated. Weight is two-fourteen. I'm starting you on Metformin five hundred milligrams twice daily, Lisinopril ten for the blood pressure, and Atorvastatin twenty for cholesterol.
+
+RAMESH: Three medications. That's a lot.
+
+DR. SHARMA: The bigger prescription is lifestyle. Cut the refined carbs — white rice, sugar, bread. Walk thirty minutes a day, five days a week. I'm referring you to our dietitian. If you commit to this, remission is absolutely possible.
+
+RAMESH: I'll do whatever it takes.
+
+DR. SHARMA: Good. I'll see you in six months with repeat labs.
+
+============================================================
+KEY METRICS: Fasting Glucose 189 | HbA1c 8.4% | BP 148/92 | LDL 158 | Weight 214 lbs
+MEDICATIONS STARTED: Metformin 500mg BID, Lisinopril 10mg, Atorvastatin 20mg
+DIAGNOSIS: Type 2 Diabetes, Hypertension, Dyslipidemia
+FOLLOW-UP: 6 months
+============================================================

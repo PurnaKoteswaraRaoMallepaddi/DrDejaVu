@@ -18,7 +18,9 @@ frontend/dist/
 # Data
 data/chroma_db/
 data/uploads/
-data/sample_audio/
+data/sample_audio/*.wav
+data/sample_audio/*.mp3
+data/sample_audio/*.m4a
 
 # IDE
 .vscode/

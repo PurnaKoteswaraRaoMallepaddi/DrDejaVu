@@ -1,0 +1,29 @@
+============================================================
+CONSULTATION 2 — SIX-MONTH FOLLOW-UP
+============================================================
+Patient:  Ramesh Patel (Male, 52)
+Doctor:   Dr. Ananya Sharma, Internal Medicine
+Date:     July 24, 2023
+Duration: ~1 minute
+============================================================
+
+DR. SHARMA: Ramesh, your A1c dropped from eight point four to seven point one. Fasting glucose is one fifty-two. It's moving the right direction, but I was hoping for more. How's the exercise been?
+
+RAMESH: Honestly, I started strong but fell off. Maybe one or two walks a week now. Diet's better though — my wife switched us to brown rice, less fried food.
+
+DR. SHARMA: The diet changes are showing, but the exercise gap is holding you back. Your HDL is still low at thirty-nine — that's the number that responds most to physical activity. Also, your urine microalbumin is borderline elevated at thirty-two. It's an early kidney flag. Completely reversible, but only if we get tighter control.
+
+RAMESH: That scares me.
+
+DR. SHARMA: Good — use that. I'm increasing your Metformin to a thousand twice daily. And I need the walking to become non-negotiable. Thirty minutes, five days minimum. I'm also giving you a glucometer — log your fasting sugar twice a week. You're down seven pounds to two-oh-seven, which is a start. Let's aim for under two hundred next time.
+
+RAMESH: I won't let you down.
+
+DR. SHARMA: Eight months. Let's see an A1c under six point five.
+
+============================================================
+KEY METRICS: Fasting Glucose 152 | HbA1c 7.1% | BP 134/86 | LDL 122 | Weight 207 lbs
+MEDICATION CHANGE: Metformin increased to 1000mg BID
+CONCERNS: Borderline microalbuminuria, poor exercise adherence
+FOLLOW-UP: 8 months
+============================================================

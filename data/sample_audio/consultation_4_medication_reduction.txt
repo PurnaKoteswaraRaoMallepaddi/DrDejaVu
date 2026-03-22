@@ -1,0 +1,31 @@
+============================================================
+CONSULTATION 4 — MEDICATION REDUCTION
+============================================================
+Patient:  Ramesh Patel (Male, 53)
+Doctor:   Dr. Ananya Sharma, Internal Medicine
+Date:     November 4, 2024
+Duration: ~1 minute
+============================================================
+
+DR. SHARMA: A1c is five point nine. Second consecutive reading below six five. Fasting glucose one-oh-one.
+
+RAMESH: Under six! So are we reducing the Metformin?
+
+DR. SHARMA: We are. I'm cutting it from a thousand twice daily to a thousand once daily with dinner. If your next A1c holds, we discuss stopping it entirely. I'm also reducing your Lisinopril from ten to five — your blood pressure is one eighteen over seventy-four, and you mentioned some morning dizziness.
+
+RAMESH: Yeah, a few times getting out of bed.
+
+DR. SHARMA: That's mild orthostatic hypotension. With twenty-eight pounds lost, your body doesn't need as much help with blood pressure anymore. The statin stays — your LDL is eighty-eight and your HDL is fifty-two, both excellent, but your family cardiac history warrants continued protection.
+
+RAMESH: One pill I can live with. I'm training for a five-K, by the way.
+
+DR. SHARMA: A five-K! Two years ago you could barely walk around the block. Kidneys, eyes — all clean. No complications whatsoever. I'm seeing you in three months since we're changing meds. If your sugars creep above one-thirty at home, call me.
+
+RAMESH: Will do, Doctor. Thank you.
+
+============================================================
+KEY METRICS: Fasting Glucose 101 | HbA1c 5.9% | BP 118/74 | LDL 88 | HDL 52 | Weight 186 lbs
+MEDICATION CHANGES: Metformin reduced to 1000mg QD, Lisinopril reduced to 5mg
+PROGRESS: 28 lbs lost, all markers at goal, training for 5K
+FOLLOW-UP: 3 months (shorter due to med changes)
+============================================================

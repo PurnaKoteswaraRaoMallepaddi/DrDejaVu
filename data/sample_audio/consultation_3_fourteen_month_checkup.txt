@@ -1,0 +1,29 @@
+============================================================
+CONSULTATION 3 — FOURTEEN-MONTH CHECK-UP
+============================================================
+Patient:  Ramesh Patel (Male, 53)
+Doctor:   Dr. Ananya Sharma, Internal Medicine
+Date:     March 11, 2024
+Duration: ~1 minute
+============================================================
+
+DR. SHARMA: Ramesh, you've lost twenty-two pounds. I can see it. Let's look at the numbers — your A1c is six point two.
+
+RAMESH: Six point two! That's below the diabetes threshold, right?
+
+DR. SHARMA: It is. Below six five. Fasting glucose is one-oh-eight. LDL ninety-four. HDL jumped to forty-seven. Blood pressure one twenty-four over seventy-eight. And your kidney microalbumin normalized — down to eighteen. Everything is trending beautifully. What changed?
+
+RAMESH: After you mentioned the kidneys, something clicked. I've been walking every morning at five-thirty, six days a week. Started lifting weights too. My wife and I cleaned out the kitchen — no more white rice, more vegetables and lean protein.
+
+DR. SHARMA: That's textbook. Your body is responding exactly the way we'd hope. I'm keeping your Metformin at the current dose for now, but if your next A1c holds under six five, we start reducing. One tip — I noticed some post-meal spikes in your glucose logs. Try eating your vegetables and protein before the carbs. It blunts the sugar response.
+
+RAMESH: Vegetables first, rice last. Got it.
+
+DR. SHARMA: See you in eight months. One more good reading and we talk about dropping meds.
+
+============================================================
+KEY METRICS: Fasting Glucose 108 | HbA1c 6.2% | BP 124/78 | LDL 94 | HDL 47 | Weight 192 lbs
+MEDICATIONS: Unchanged (pending next result for reduction)
+PROGRESS: Below diabetes threshold, kidneys normalized, 22 lbs lost
+FOLLOW-UP: 8 months
+============================================================
