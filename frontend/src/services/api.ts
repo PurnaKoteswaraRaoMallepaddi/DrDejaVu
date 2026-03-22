@@ -1,0 +1,87 @@
+import axios from "axios";
+import type {
+  Consultation,
+  TranscribeResult,
+  QueryResult,
+  ChatResult,
+} from "../types";
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "",
+});
+
+export async function transcribeAudio(
+  file: File | Blob,
+  patientId: string,
+  doctorName?: string,
+  consultationDate?: string
+): Promise<TranscribeResult> {
+  const form = new FormData();
+  form.append("audio", file);
+  form.append("patient_id", patientId);
+  if (doctorName) form.append("doctor_name", doctorName);
+  if (consultationDate) form.append("consultation_date", consultationDate);
+
+  console.log("[api] POST /api/transcribe — baseURL:", api.defaults.baseURL, "origin:", window.location.origin);
+  try {
+    const { data } = await api.post<TranscribeResult>("/api/transcribe", form);
+    console.log("[api] transcribe response:", data);
+    return data;
+  } catch (err: any) {
+    console.error("[api] transcribe FAILED:", err.message);
+    console.error("[api] request URL:", err.config?.url, "baseURL:", err.config?.baseURL);
+    if (err.response) {
+      console.error("[api] response status:", err.response.status, "data:", err.response.data);
+    } else if (err.request) {
+      console.error("[api] no response received (network error or CORS block)");
+    }
+    throw err;
+  }
+}
+
+export async function queryHistory(
+  patientId: string,
+  question: string
+): Promise<QueryResult> {
+  const { data } = await api.post<QueryResult>("/api/query", {
+    patient_id: patientId,
+    question,
+  });
+  return data;
+}
+
+export async function chatText(
+  patientId: string,
+  question: string,
+  voiceResponse = true
+): Promise<ChatResult> {
+  const { data } = await api.post<ChatResult>("/api/chat/text", {
+    patient_id: patientId,
+    question,
+    voice_response: voiceResponse,
+  });
+  return data;
+}
+
+export async function chatVoice(
+  audioBlob: Blob,
+  patientId: string
+): Promise<ChatResult> {
+  const form = new FormData();
+  form.append("audio", audioBlob, "recording.wav");
+  form.append("patient_id", patientId);
+
+  const { data } = await api.post<ChatResult>("/api/chat/voice", form);
+  return data;
+}
+
+export async function getConsultations(
+  patientId: string
+): Promise<Consultation[]> {
+  const { data } = await api.get<Consultation[]>(
+    `/api/consultations/${patientId}`
+  );
+  return data;
+}
+
+export default api;
