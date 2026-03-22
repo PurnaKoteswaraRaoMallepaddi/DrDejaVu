@@ -15,6 +15,48 @@ from app.config import settings
 from app.services.http_client import get_http_client
 
 
+def _is_straightforward_question(question: str) -> bool:
+    """Detect if a question is straightforward (factual/quick) or needs explanation.
+    
+    Straightforward: factual, quantitative, or yes/no questions.
+    Explanation-needed: why, how, compare, impact, explain, etc.
+    """
+    question_lower = question.lower().strip()
+    
+    # Explanation-demanding keywords indicate complex questions
+    explanation_keywords = [
+        "why", "how", "explain", "what does", "what caused",
+        "compare", "difference", "relationship", "impact", "affect",
+        "effect", "cause", "tell me about", "describe", "elaborate"
+    ]
+    
+    # Check for explanation keywords
+    for keyword in explanation_keywords:
+        if keyword in question_lower:
+            return False
+    
+    # Straightforward patterns: factual, quick answers
+    straightforward_patterns = [
+        r"^what is\s",
+        r"^when is\s",
+        r"^where is\s",
+        r"^who is\s",
+        r"^how much\s",
+        r"^how many\s",
+        r"\?$",  # Yes/no or short questions ending with ?
+    ]
+    
+    for pattern in straightforward_patterns:
+        if re.search(pattern, question_lower):
+            return True
+    
+    # If question is very short and doesn't contain explanation keywords, likely straightforward
+    if len(question_lower) < 50 and "explain" not in question_lower:
+        return True
+    
+    return False
+
+
 def convert_to_voice_friendly_text(text: str) -> str:
     """Convert formatted text (markdown, tables, emojis) to natural speech.
     
@@ -115,6 +157,7 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
     """Use gpt-oss-120b LLM for chat completion.
 
     Uses /chat/completions endpoint with JSON format.
+    Dynamically adjusts response length based on question complexity.
     """
     url = f"{settings.eigen_api_base_url}/chat/completions"
     headers = {
@@ -122,7 +165,16 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
         "Content-Type": "application/json",
     }
 
-    system_prompt = (
+    # Extract user question to determine response style
+    user_question = ""
+    if messages:
+        user_question = messages[-1].get("content", "") if messages[-1].get("role") == "user" else ""
+    
+    # Determine if question is straightforward or needs explanation
+    is_straightforward = _is_straightforward_question(user_question)
+    
+    # Build base system prompt
+    base_prompt = (
         "You are DrDejaVu, a compassionate health assistant that helps patients "
         "understand their medical history by comparing consultations over time. "
         "Provide clear, empathetic answers based on the consultation records provided. "
@@ -131,11 +183,31 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
         "Use everyday language rather than overly technical terms. "
         "Break information into short, digestible points. "
         "Sound warm, understanding, and genuinely interested in helping the patient."
-        "Put the response straight and short to the point with in 10 to 20 words, and avoid unnecessary details or lengthy explanations."
     )
+    
+    # Add dynamic instructions based on question type
+    if is_straightforward:
+        # Quick answer: 5-10 seconds, minimal explanation
+        response_instruction = (
+            " Keep your response brief and direct (1-2 sentences). "
+            "Aim for a response that takes 5-10 seconds to speak aloud."
+        )
+        max_tokens = 150
+    else:
+        # Explanation needed: 50-100 words, more detail
+        response_instruction = (
+            " Provide a clear but concise explanation (50-100 words). "
+            "Include key points and relevant dates from consultation records."
+        )
+        max_tokens = 350
+    
+    system_prompt = base_prompt + response_instruction
+    
     if patient_context:
         system_prompt += f"\n\nRelevant consultation records:\n{patient_context}"
 
+    logging.info(f"[Chat] Question type: {'straightforward' if is_straightforward else 'explanation-needed'}")
+    logging.info(f"[Chat] Max tokens: {max_tokens}")
     logging.info(f"[Chat] System prompt length: {len(system_prompt)} chars")
 
     # Build messages array for LLM
@@ -145,7 +217,7 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
         "model": settings.eigen_summarizer_model,
         "messages": messages_array,
         "temperature": 0.7,
-        "max_tokens": 256,
+        "max_tokens": max_tokens,
         "reasoning_effort": "low",
         "stream": False,
     }
