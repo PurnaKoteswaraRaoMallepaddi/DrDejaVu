@@ -134,6 +134,7 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
         "Use everyday language rather than overly technical terms. "
         "Break information into short, digestible points. "
         "Sound warm, understanding, and genuinely interested in helping the patient."
+        "Put the response straight and short to the point with in 10 to 20 words, and avoid unnecessary details or lengthy explanations."
     )
     if patient_context:
         system_prompt += f"\n\nRelevant consultation records:\n{patient_context}"
