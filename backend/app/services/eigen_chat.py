@@ -137,7 +137,7 @@ async def generate_voice_response(text: str, language: str = "en") -> str:
 
     client = get_http_client()
     response = await client.post(url, headers=headers,
-                                 json={"model": settings.eigen_chat_model, "text": voice_text})
+                                 json={"model": settings.eigen_chat_model, "text": voice_text, "voice_id": settings.eigen_voice_id})
     logging.info(f"[TTS] Response status: {response.status_code}")
 
     if response.status_code != 200:

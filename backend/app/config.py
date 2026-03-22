@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     eigen_chat_model: str = "higgs2p5"
     eigen_summarizer_model: str = "gpt-oss-120b"
     eigen_understanding_model: str = "higgs_audio_understanding_3p5"
+    eigen_voice_id: str = "0de61e654c4546829a38d2e6d51165f8"
 
     # Storage
     chroma_persist_dir: str = "./data/chroma_db"
