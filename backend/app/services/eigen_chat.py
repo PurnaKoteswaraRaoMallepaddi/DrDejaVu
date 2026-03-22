@@ -7,6 +7,7 @@ Supports multilingual output (EN, ES, DE, FR, IT).
 
 import json
 import logging
+import re
 import uuid
 from pathlib import Path
 
@@ -15,31 +16,87 @@ import httpx
 from app.config import settings
 
 
+def convert_to_voice_friendly_text(text: str) -> str:
+    """Convert formatted text (markdown, tables, emojis) to natural speech.
+    
+    Transforms visual formatting into conversational, voice-optimized text
+    that sounds natural when read aloud.
+    """
+    # Remove markdown formatting
+    text = text.replace("**", "")  # Remove bold
+    text = text.replace("__", "")  # Remove alternative bold
+    text = text.replace("_", "")   # Remove italics
+    text = text.replace("`", "")   # Remove inline code
+    text = text.replace("~~", "")  # Remove strikethrough
+    
+    # Remove emojis and special symbols
+    text = re.sub(r'[📋🩺💊📊✅❌⚠️🔔🏥💉📝🔗📈📉]', '', text)
+    
+    # Convert markdown headers to plain text
+    text = re.sub(r'^#+\s+', '', text, flags=re.MULTILINE)
+    
+    # Remove markdown table formatting
+    lines = text.split('\n')
+    processed_lines = []
+    skip_table_separator = False
+    
+    for line in lines:
+        # Skip table separators (lines with just |, -, and spaces)
+        if re.match(r'^[\s|:-]+$', line):
+            skip_table_separator = True
+            continue
+        
+        # Convert table cells to readable format
+        if '|' in line:
+            # Extract table content, remove pipes
+            cells = [cell.strip() for cell in line.split('|') if cell.strip()]
+            line = ' - '.join(cells)
+        
+        # Remove multiple spaces
+        line = re.sub(r'\s+', ' ', line).strip()
+        
+        if line:
+            processed_lines.append(line)
+    
+    text = '\n'.join(processed_lines)
+    
+    # Fix common patterns for natural speech
+    text = text.replace('---', '.')  # Section breaks become periods
+    text = re.sub(r'•\s*', ' ', text)  # Convert bullet points
+    text = re.sub(r'\n{2,}', '\n', text)  # Remove excessive line breaks
+    
+    # Add pauses for natural speech (periods get emphasis)
+    text = text.replace('\n', '. ')  # Convert newlines to sentence breaks
+    
+    # Clean up any artifacts
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    return text
+
+
 async def generate_voice_response(text: str, language: str = "en") -> str:
     """Generate a spoken audio response using Eigen Higgs Audio V2.5.
 
     Uses the /generate endpoint with form-data format.
+    Converts formatted text to natural speech before TTS generation.
     Returns a URL path to the generated audio file.
     
     Note: HiggsAudio V2.5 has a character limit (~1000 chars), so longer text is truncated.
     """
+    # Convert formatted text to voice-friendly version
+    voice_text = convert_to_voice_friendly_text(text)
+    
     url = f"{settings.eigen_api_base_url}/generate"
     headers = {
         "Authorization": f"Bearer {settings.eigen_api_key}",
     }
-    
-    # Truncate text to avoid exceeding TTS limits (~1000 chars)
-    max_chars = 1000
-    if len(text) > max_chars:
-        text = text[:max_chars] + "..."
-        logging.info(f"[TTS] Text truncated from {len(text)} to {max_chars} chars")
     
     audio_id = str(uuid.uuid4())
     output_path = Path(settings.upload_dir) / f"response_{audio_id}.wav"
 
     async with httpx.AsyncClient(timeout=60.0) as client:
         response = await client.post(url, headers=headers, 
-                                     json={"model": settings.eigen_chat_model, "text": text})
+                                     json={"model": settings.eigen_chat_model, "text": voice_text})
         logging.info(f"[TTS] Response status: {response.status_code}")
         
         # Log error response BEFORE raising
@@ -72,7 +129,11 @@ async def chat_completion(messages: list[dict], patient_context: str = "") -> st
         "You are DrDejaVu, a compassionate health assistant that helps patients "
         "understand their medical history by comparing consultations over time. "
         "Provide clear, empathetic answers based on the consultation records provided. "
-        "Always note the dates of consultations you reference."
+        "Always note the dates of consultations you reference. "
+        "When giving voice responses, be conversational and natural, as if speaking to a friend. "
+        "Use everyday language rather than overly technical terms. "
+        "Break information into short, digestible points. "
+        "Sound warm, understanding, and genuinely interested in helping the patient."
     )
     if patient_context:
         system_prompt += f"\n\nRelevant consultation records:\n{patient_context}"

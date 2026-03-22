@@ -55,14 +55,22 @@ export default function Dashboard() {
       setLoading(true);
 
       try {
+        console.log("[Dashboard] Sending voice to chat API...");
         const result = await chatVoice(blob, PATIENT_ID);
+        console.log("[Dashboard] Chat response received:", {
+          answerLength: result.answer.length,
+          hasAudioUrl: !!result.audio_url,
+          audioUrl: result.audio_url,
+          sourcesCount: result.sources.length,
+        });
         addMessage({
           role: "assistant",
           content: result.answer,
           audio_url: result.audio_url ?? undefined,
           sources: result.sources,
         });
-      } catch {
+      } catch (error) {
+        console.error("[Dashboard] Voice chat failed:", error);
         addMessage({
           role: "assistant",
           content: "Sorry, I couldn't process your voice message.",
