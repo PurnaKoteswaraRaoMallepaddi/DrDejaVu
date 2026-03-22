@@ -40,53 +40,7 @@ One question. Multiple doctors. Multiple years. One precise answer — in second
 ---
  
 ## Live Demo — Meet Ramesh
- 
-**Ramesh Patel**, 52, was diagnosed with Type 2 Diabetes in January 2023. Terrified he'd end up on insulin like his father, he committed to change. Over three years, he saw **four different specialists**:
- 
-| Doctor | Specialty | Key Role |
-|--------|-----------|----------|
-| **Dr. Ananya Sharma** | Internal Medicine | Primary diabetes management, medications, lab tracking |
-| **Dr. Vikram Mehta** | Cardiology | Cardiac risk assessment, echo, aspirin, LDL/HDL monitoring |
-| **Dr. Priya Nair** | Clinical Nutrition | Meal planning, plate method, millet swaps, eating order |
-| **Dr. Sunita Reddy** | Ophthalmology | Annual diabetic retinopathy screening |
- 
-### Ramesh's 3-Year Journey (8 Consultations)
- 
-```
-Jan 2023  [Dr. Sharma]   Diagnosed — HbA1c 8.4%, Glucose 189, BP 148/92, Weight 214 lbs
-                          Started: Metformin, Lisinopril, Atorvastatin
- 
-Feb 2023  [Dr. Nair]     Nutritionist — Plate method, millets, vegetables-first eating
- 
-Apr 2023  [Dr. Mehta]    Cardiologist — Elevated cardiac risk, echo ordered, aspirin added
- 
-Jul 2023  [Dr. Sharma]   6-month follow-up — HbA1c 7.1, Glucose 152, lost 7 lbs
-                          Metformin increased, borderline kidney flag
- 
-Mar 2024  [Dr. Sharma]   14-month check — HbA1c 6.2 (BELOW threshold!), lost 22 lbs
-                          Kidneys normalized, all markers improving
- 
-May 2024  [Dr. Reddy]    Eye screening — No retinopathy, no macular edema, all clear
- 
-Nov 2024  [Dr. Sharma]   Medication reduction — HbA1c 5.9, Metformin & Lisinopril reduced
-                          Training for a 5K (!)
- 
-Feb 2026  [Dr. Sharma]   REMISSION — HbA1c 5.4, Glucose 94, off 2 of 3 medications
-                          32 lbs lost. Diabetes officially in remission.
-```
- 
-**The 3-year transformation:**
-| Metric | Jan 2023 | Feb 2026 | Change |
-|--------|----------|----------|--------|
-| HbA1c | 8.4% | 5.4% | -3.0 points |
-| Fasting Glucose | 189 | 94 | -95 mg/dL |
-| Blood Pressure | 148/92 | 114/70 | Normalized |
-| Weight | 214 lbs | 182 lbs | -32 lbs |
-| Medications | 3 | 1 | Off Metformin & Lisinopril |
- 
-**No patient can recall this from memory. DrDejaVu can — in 2 seconds.**
- 
----
+
  
 ## What We Built
  
