@@ -1,0 +1,32 @@
+============================================================
+CONSULTATION 6 — CARDIOLOGY REFERRAL
+============================================================
+Patient:  Ramesh Patel (Male, 52)
+Doctor:   Dr. Vikram Mehta, Cardiology
+Date:     April 10, 2023
+Duration: ~1 minute
+============================================================
+
+DR. MEHTA: Mr. Patel, Dr. Sharma referred you after your diabetes diagnosis. I've reviewed your labs. Your LDL at one fifty-eight and HDL at thirty-six give you a very unfavorable ratio. Combined with the new diabetes and your father's cardiac history — he had a bypass at sixty — your ten-year cardiovascular risk is elevated.
+
+RAMESH: Am I at risk for a heart attack?
+
+DR. MEHTA: Not immediately, but we need to be proactive. Your EKG is normal, no arrhythmias. I've ordered an echocardiogram and a coronary calcium score. The echo will check your heart's pumping function, and the calcium score tells us if there's any plaque building up in your arteries.
+
+RAMESH: Dr. Sharma already put me on a statin.
+
+DR. MEHTA: Good — Atorvastatin twenty is the right call. I want your LDL below one hundred, ideally below seventy given your risk factors. I'm also recommending daily low-dose aspirin, eighty-one milligrams, for cardiovascular protection. And I need you to monitor your resting heart rate — if it goes above ninety consistently, call my office.
+
+RAMESH: Is the diabetes making this worse?
+
+DR. MEHTA: Diabetes accelerates arterial damage. But here's the good news — every pound you lose, every blood sugar point you drop, directly reduces your cardiac risk. What Dr. Sharma is doing with the metabolic management is exactly what protects your heart long-term. I'll see you after the echo results, probably in three weeks.
+
+RAMESH: Thank you, Doctor.
+
+============================================================
+KEY METRICS: LDL 158 | HDL 36 | LDL/HDL Ratio 4.39 | Resting HR 78 | EKG Normal
+TESTS ORDERED: Echocardiogram, Coronary Calcium Score
+MEDICATIONS ADDED: Aspirin 81mg daily
+RISK ASSESSMENT: Elevated 10-year cardiovascular risk (diabetes + family history + dyslipidemia)
+FOLLOW-UP: 3 weeks (post-echo review)
+============================================================

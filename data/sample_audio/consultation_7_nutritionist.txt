@@ -1,0 +1,33 @@
+============================================================
+CONSULTATION 7 — NUTRITIONIST / DIETITIAN VISIT
+============================================================
+Patient:  Ramesh Patel (Male, 52)
+Doctor:   Dr. Priya Nair, Clinical Nutrition
+Date:     February 5, 2023
+Duration: ~1 minute
+============================================================
+
+DR. NAIR: Ramesh, Dr. Sharma sent me your labs. HbA1c eight point four, fasting glucose one eighty-nine. Let's build you a meal plan that works with your life, not against it.
+
+RAMESH: I don't want to feel like I'm on a diet forever. My wife cooks traditional South Indian food — rice, sambar, dosas. I can't give all of that up.
+
+DR. NAIR: You don't have to. We're going to modify, not eliminate. First, swap white rice for brown rice or millets like ragi and jowar. Same comfort food, much lower glycemic impact. For dosas, use a batter that's fifty percent moong dal — higher protein, lower blood sugar spike.
+
+RAMESH: What about portions?
+
+DR. NAIR: Great question. I want you to follow the plate method — half your plate is non-starchy vegetables like beans, spinach, or bitter gourd. One quarter is your protein — dal, paneer, fish, or chicken. One quarter is your carb — that's your rice or roti. And here's a key trick: eat the vegetables and protein first, carbs last. This alone can reduce your post-meal glucose spike by up to thirty percent.
+
+RAMESH: Vegetables first. That's what Dr. Sharma said too.
+
+DR. NAIR: Because it works. I also want you to cut sugary drinks completely — no fruit juice, no sweetened chai. Black coffee or green tea is fine. Snack on nuts, seeds, or a small handful of roasted chana instead of biscuits. And no eating after eight PM — give your body a twelve-hour overnight fast.
+
+RAMESH: I can do this. My wife is very supportive.
+
+DR. NAIR: That's your biggest advantage. Let's check in monthly for the first three months to fine-tune things. I'll track your weight and fasting glucose trends.
+
+============================================================
+KEY METRICS: Current Weight 214 lbs | Target Weight 185 lbs | Daily Calorie Target ~1800 kcal
+DIETARY PLAN: Plate method (50% veg, 25% protein, 25% carb), vegetables-first eating order
+KEY CHANGES: White rice → brown rice/millets, moong dal dosa batter, no sugary drinks, 12-hour overnight fast
+FOLLOW-UP: Monthly for 3 months
+============================================================

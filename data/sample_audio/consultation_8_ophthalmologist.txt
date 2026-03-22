@@ -1,0 +1,31 @@
+============================================================
+CONSULTATION 8 — ANNUAL DIABETIC EYE SCREENING
+============================================================
+Patient:  Ramesh Patel (Male, 53)
+Doctor:   Dr. Sunita Reddy, Ophthalmology
+Date:     May 15, 2024
+Duration: ~1 minute
+============================================================
+
+DR. REDDY: Ramesh, I've completed your dilated fundus exam and the retinal OCT scan. Good news — no signs of diabetic retinopathy. Your retinal blood vessels look healthy, no microaneurysms, no hemorrhages, no macular edema.
+
+RAMESH: That's a relief. My father had diabetic eye problems — he needed laser treatment.
+
+DR. REDDY: Your father likely had prolonged uncontrolled diabetes. You've caught yours early and your sugar control has been excellent — Dr. Sharma tells me your A1c is six point two. That's protective. The better your glucose control, the lower your risk of retinopathy.
+
+RAMESH: Is there anything I should watch for?
+
+DR. REDDY: Any sudden blurry vision, floaters — those little specks that drift across your vision — or dark spots. If you notice any of those, come in immediately, don't wait for your annual visit. Your intraocular pressure is sixteen in both eyes, which is perfectly normal, so no glaucoma concerns either.
+
+RAMESH: How often should I come back?
+
+DR. REDDY: Annually. Every diabetic patient needs a dilated eye exam once a year, regardless of how well controlled they are. If your diabetes stays in remission range, the risk drops significantly, but we still screen. I'll send my report to Dr. Sharma.
+
+RAMESH: Thank you, Doctor.
+
+============================================================
+KEY METRICS: Intraocular Pressure 16/16 mmHg | Retinal Status: No retinopathy | OCT: Normal macular thickness
+FINDINGS: No diabetic retinopathy, no macular edema, no glaucoma
+RECOMMENDATION: Continue annual screening regardless of diabetes status
+FOLLOW-UP: 12 months
+============================================================
