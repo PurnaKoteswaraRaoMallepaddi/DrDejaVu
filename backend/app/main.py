@@ -10,7 +10,7 @@ logging.basicConfig(
 )
 
 from app.config import settings
-from app.routers import transcribe, query, chat, consultations, health
+from app.routers import transcribe, query, chat, consultations, health, audio
 
 app = FastAPI(
     title="DrDejaVu API",
@@ -51,6 +51,7 @@ class RequestLogMiddleware(BaseHTTPMiddleware):
 app.add_middleware(RequestLogMiddleware)
 
 app.include_router(health.router, tags=["Health"])
+app.include_router(audio.router, prefix="/api", tags=["Audio"])
 app.include_router(transcribe.router, prefix="/api", tags=["Transcription"])
 app.include_router(query.router, prefix="/api", tags=["Query"])
 app.include_router(chat.router, prefix="/api", tags=["Chat"])
